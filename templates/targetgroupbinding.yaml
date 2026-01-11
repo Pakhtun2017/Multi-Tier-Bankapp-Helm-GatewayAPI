@@ -1,0 +1,11 @@
+{{- if .Values.gateway.enabled }}
+apiVersion: elbv2.k8s.aws/v1beta1
+kind: TargetGroupBinding
+metadata:
+  name: {{ .Release.Name }}-tgb
+spec:
+  targetGroupAttributes:
+    stickiness.enabled: "true"
+    stickiness.lb_cookie.duration_seconds: "172800"
+{{- end }}
+

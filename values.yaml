@@ -1,0 +1,42 @@
+# =====================
+# BankApp configuration
+# =====================
+bankapp:
+  replicas: 1
+
+  image:
+    repository: oolumee/bankapp
+    tag: "3"
+
+  service:
+    type: ClusterIP
+    port: 80
+
+  env:
+    datasourceUrl: jdbc:mysql://mysql-service:3306/bankappdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: Test@123
+
+
+# =====================
+# Gateway API (ALB)
+# =====================
+gateway:
+  enabled: true
+  className: alb
+  host: www.pashtun-verse.com
+  port: 80
+
+
+# =====================
+# MySQL configuration
+# =====================
+mysql:
+  image: mysql:8
+  rootPassword: Test@123
+  database: bankappdb
+
+  service:
+    type: ClusterIP
+    port: 3306
+
